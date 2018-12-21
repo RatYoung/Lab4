@@ -23,7 +23,7 @@ public class NearestNeighbor {
 	public static class NearestMapper extends Mapper<Object, Text, Text, Text> {
 		@Override
 		public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-			double score = -1;
+			//double score = -1;
 			//int emotion = -2;
 
 			String vector = value.toString().split("\t")[1];
@@ -51,7 +51,7 @@ public class NearestNeighbor {
 
 				sub_score = Math.sqrt(sub_score);
 				for (int i = 0; i < kneighbor.size(); i++) {
-					if (kneighbor.get(i) < sub_score) {
+					if (kneighbor.get(i) > sub_score) {
 						kneighbor.set(i, sub_score);
 						emotion.set(i, Integer.parseInt(emotions.get(vectors.indexOf(each))));
 					}
